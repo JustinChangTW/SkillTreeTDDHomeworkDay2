@@ -98,7 +98,7 @@ namespace Shop.Tests
                 new BuyBook() { Serial="B004",Name="哈利波特第四集",Price=100,volume=4,Quantity=1 },
                 new BuyBook() { Serial="B005",Name="哈利波特第五集",Price=100,volume=5,Quantity=1 }
             };
-            double expected = 357;
+            double expected = 375;
             //act
             double actual = shoppingcart.CalculatePrice(buybook);
 
