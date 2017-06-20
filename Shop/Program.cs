@@ -22,13 +22,14 @@ namespace Shop
             this._books = books;
         }
 
-        public int CalculatePrice(IEnumerable<BuyBook> buybooks)
+        public double CalculatePrice(IEnumerable<BuyBook> buybooks)
         {
-            var totalPrice = 0;
+            double totalPrice = 0;
             foreach (var book in buybooks)
             {
                 totalPrice += book.Price;
             }
+            if (buybooks.Count() == 2) totalPrice = totalPrice * 0.95;
             return totalPrice;
         }
 
@@ -40,7 +41,7 @@ namespace Shop
         public string Serial { get; set; }
         public string Name { get; set; }
         public int volume { get; set; }
-        public int Price { get; set; }
+        public double Price { get; set; }
     }
 
     public class BuyBook : Book

@@ -38,9 +38,9 @@ namespace Shop.Tests
                 new BuyBook() { Serial="B001",Name="哈利波特第一集",Price=100,volume=1,Quantity=1 },
                 new BuyBook() { Serial="B002",Name="哈利波特第二集",Price=100,volume=1,Quantity=1 }
             };
-            var expected = 190;
+            double expected = 190;
             //act
-            var actual = shoppingcart.CalculatePrice(buybook);
+            double actual = shoppingcart.CalculatePrice(buybook);
 
             //assert
             Assert.AreEqual(expected, actual);
