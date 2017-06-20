@@ -31,6 +31,7 @@ namespace Shop
             }
             if (buybooks.Count() == 2) totalPrice = totalPrice * 0.95;
             if (buybooks.Count() == 3) totalPrice = totalPrice * 0.90;
+            if (buybooks.Count() == 4) totalPrice = totalPrice * 0.80;
             return totalPrice;
         }
 
