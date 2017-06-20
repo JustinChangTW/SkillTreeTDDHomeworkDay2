@@ -18,7 +18,7 @@ namespace Shop.Tests
             var shoppingcart = new ShoppingCart(GetBook());
             List<BuyBook> buybook = new List<BuyBook>()
             {
-                new BuyBook() { Serial="B001",Name="哈利波特第一集",Price=100,Quantity=1 }
+                new BuyBook() { Serial="B001",Name="哈利波特第一集",Price=100,volume=1,Quantity=1 }
             };
             var expected = 100;
             //act
@@ -32,25 +32,13 @@ namespace Shop.Tests
         {
             return new List<Book>()
             {
-                new Book() { Serial="B001",Name="哈利波特第一集",Price=100 },
-                new Book() { Serial="B002",Name="哈利波特第二集",Price=100 },
-                new Book() { Serial="B003",Name="哈利波特第三集",Price=100 },
-                new Book() { Serial="B004",Name="哈利波特第四集",Price=100 },
-                new Book() { Serial="B005",Name="哈利波特第五集",Price=100 }
+                new Book() { Serial="B001",Name="哈利波特第一集",volume=1,Price=100 },
+                new Book() { Serial="B002",Name="哈利波特第二集",volume=1,Price=100 },
+                new Book() { Serial="B003",Name="哈利波特第三集",volume=1,Price=100 },
+                new Book() { Serial="B004",Name="哈利波特第四集",volume=1,Price=100 },
+                new Book() { Serial="B005",Name="哈利波特第五集",volume=1,Price=100 }
             };
         }
     }
 
-    public class Book
-    {
-        public string Serial { get; set; }
-        public string Name { get; set; }
-        public string Number { get; set; }
-        public int Price { get; set; }
-    }
-
-    public class BuyBook:Book
-    {
-        public int Quantity { get; set; }
-    }
 }

@@ -15,16 +15,36 @@ namespace Shop
 
     public class ShoppingCart
     {
-        private IEnumerable<Shop.Tests.Book> enumerable;
+        private IEnumerable<Book> _books;
 
-        public ShoppingCart(IEnumerable<Shop.Tests.Book> enumerable)
+        public ShoppingCart(IEnumerable<Book> books)
         {
-            this.enumerable = enumerable;
+            this._books = books;
         }
 
-        public int CalculatePrice()
+        public int CalculatePrice(IEnumerable<BuyBook> buybooks)
         {
-            return 0;
+            var totalPrice = 0;
+            foreach (var book in buybooks)
+            {
+                totalPrice += book.Price;
+            }
+            return totalPrice;
         }
+
+
+    }
+
+    public class Book
+    {
+        public string Serial { get; set; }
+        public string Name { get; set; }
+        public int volume { get; set; }
+        public int Price { get; set; }
+    }
+
+    public class BuyBook : Book
+    {
+        public int Quantity { get; set; }
     }
 }
