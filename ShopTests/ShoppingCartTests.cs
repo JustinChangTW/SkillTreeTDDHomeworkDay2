@@ -28,6 +28,24 @@ namespace Shop.Tests
             Assert.AreEqual(expected, actual);
         }
 
+        [TestMethod()]
+        public void CalculatePriceTest_Buy_Book_volume1_Quantity1＿volume2＿Quantity1_TotalPrice190()
+        {
+            //arrange
+            var shoppingcart = new ShoppingCart(GetBook());
+            List<BuyBook> buybook = new List<BuyBook>()
+            {
+                new BuyBook() { Serial="B001",Name="哈利波特第一集",Price=100,volume=1,Quantity=1 },
+                new BuyBook() { Serial="B002",Name="哈利波特第二集",Price=100,volume=1,Quantity=1 }
+            };
+            var expected = 190;
+            //act
+            var actual = shoppingcart.CalculatePrice(buybook);
+
+            //assert
+            Assert.AreEqual(expected, actual);
+        }
+
         public IEnumerable<Book> GetBook()
         {
             return new List<Book>()
