@@ -115,14 +115,16 @@ namespace Shop.Tests
             {
                 new BuyBook() { Serial="B001",Name="哈利波特第一集",Price=100,volume=1,Quantity=1 },
                 new BuyBook() { Serial="B002",Name="哈利波特第二集",Price=100,volume=2,Quantity=1 },
-                new BuyBook() { Serial="B003",Name="哈利波特第三集",Price=100,volume=3,Quantity=2 },
+                new BuyBook() { Serial="B003",Name="哈利波特第三集",Price=100,volume=3,Quantity=2 }
             };
+
             double expected = 370;
+
             //act
             double actual = shoppingcart.CalculatePrice(buybook);
 
-            //assert
             Assert.AreEqual(expected, actual);
+            //assert
         }
 
         public IEnumerable<Book> GetBook()
@@ -130,10 +132,10 @@ namespace Shop.Tests
             return new List<Book>()
             {
                 new Book() { Serial="B001",Name="哈利波特第一集",volume=1,Price=100 },
-                new Book() { Serial="B002",Name="哈利波特第二集",volume=1,Price=100 },
-                new Book() { Serial="B003",Name="哈利波特第三集",volume=1,Price=100 },
-                new Book() { Serial="B004",Name="哈利波特第四集",volume=1,Price=100 },
-                new Book() { Serial="B005",Name="哈利波特第五集",volume=1,Price=100 }
+                new Book() { Serial="B002",Name="哈利波特第二集",volume=2,Price=100 },
+                new Book() { Serial="B003",Name="哈利波特第三集",volume=3,Price=100 },
+                new Book() { Serial="B004",Name="哈利波特第四集",volume=4,Price=100 },
+                new Book() { Serial="B005",Name="哈利波特第五集",volume=5,Price=100 }
             };
         }
     }
