@@ -148,6 +148,30 @@ namespace Shop.Tests
             //assert
         }
 
+        [TestMethod()]
+        public void CalculatePriceTest_Buy_Book_volume1_Quantity1＿volume2＿Quantity2_volume3_Quantity1_volume4_Quantity3_volume5_Quantity1＿TotalPrice665＿100X5And100X2And100()
+        {
+            //arrange
+            var shoppingcart = new ShoppingCart(GetBook());
+            List<BuyBook> buybook = new List<BuyBook>()
+            {
+                new BuyBook() { Serial="B001",Name="哈利波特第一集",Price=100,volume=1,Quantity=1 },
+                new BuyBook() { Serial="B002",Name="哈利波特第二集",Price=100,volume=2,Quantity=2 },
+                new BuyBook() { Serial="B003",Name="哈利波特第三集",Price=100,volume=3,Quantity=1 },
+                new BuyBook() { Serial="B004",Name="哈利波特第四集",Price=100,volume=4,Quantity=3 },
+                new BuyBook() { Serial="B005",Name="哈利波特第五集",Price=100,volume=5,Quantity=1 }
+            };
+
+            double expected = 665;
+
+            //act
+            double actual = shoppingcart.CalculatePrice(buybook);
+
+            Assert.AreEqual(expected, actual);
+            //assert
+        }
+
+
         public IEnumerable<Book> GetBook()
         {
             return new List<Book>()
