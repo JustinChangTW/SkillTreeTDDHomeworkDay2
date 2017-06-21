@@ -25,7 +25,7 @@ namespace Shop
             double totalPrice = 0;
 
             //分套
-            var bookGroupgroups = SetGroup(buybooks);
+            var bookGroupgroups = buybooks.SetGroup(_books);
             //計算每一套金額
             foreach (var bookGroupgroup in bookGroupgroups)
             {        
@@ -54,38 +54,13 @@ namespace Shop
             return discount;
         }
 
-        private Dictionary<int, double>[][] SetGroup(IEnumerable<BuyBook> buybooks)
+    }
+
+    public static class ShoppingCarExtensions
+    {
+        public static Dictionary<int, double>[][] SetDefault(this Dictionary<int, double>[][] bookgriup, int kit, int volume)
         {
-            var buyBooks = buybooks as IList<BuyBook> ?? buybooks.ToList();
-            var maxquantity = buyBooks.Max(o => o.Quantity); //找尋最多數量的集數
-            var bookmax = _books.Count();                    //商品數量
-            var bookgriup = new Dictionary<int, double>[maxquantity][];
-            bookgriup[0] = new Dictionary<int, double>[bookmax]; // {0, 0, 0, 0, 0};
-
-            SetDefault(bookgriup,maxquantity, bookmax);
-
-            var voluem = 0;
-            foreach(var book in _books)
-            {
-                var buybookVolume = buyBooks.SingleOrDefault(o => o.Serial == book.Serial);
-
-                if (buybookVolume != null)
-                {
-                    for (var kit = 0; kit <= buybookVolume.Quantity - 1; kit++)
-                    {
-                        var volumemapprice = new Dictionary<int, double> {{1, buybookVolume.Price}};
-                        bookgriup[kit][voluem] = volumemapprice;
-                    }
-                }
-                voluem++; 
-            }
-
-            return bookgriup;
-        }
-
-        private void SetDefault(Dictionary<int, double>[][] bookgriup,int kit,int volume)
-        {
-            var volumemapprice = new Dictionary<int, double> {{0, 0}};
+            var volumemapprice = new Dictionary<int, double> { { 0, 0 } };
             var _kit = 0;
             for (; _kit <= kit - 1; _kit++)
             {
@@ -96,7 +71,39 @@ namespace Shop
                     bookgriup[_kit][_volume] = volumemapprice;
                 }
             }
+            return bookgriup;
         }
+
+        public static Dictionary<int, double>[][] SetGroup(this IEnumerable<BuyBook> buybooks, IEnumerable<Book> books)
+        {
+            var buyBooks = buybooks as IList<BuyBook> ?? buybooks.ToList();
+            var maxquantity = buyBooks.Max(o => o.Quantity); //找尋最多數量的集數
+            var bookmax = books.Count();                    //商品數量
+            var bookgriup = new Dictionary<int, double>[maxquantity][];
+            bookgriup[0] = new Dictionary<int, double>[bookmax]; // {0, 0, 0, 0, 0};
+
+            bookgriup.SetDefault(maxquantity, bookmax);
+
+            var voluem = 0;
+            foreach (var book in books)
+            {
+                var buybookVolume = buyBooks.SingleOrDefault(o => o.Serial == book.Serial);
+
+                if (buybookVolume != null)
+                {
+                    for (var kit = 0; kit <= buybookVolume.Quantity - 1; kit++)
+                    {
+                        var volumemapprice = new Dictionary<int, double> { { 1, buybookVolume.Price } };
+                        bookgriup[kit][voluem] = volumemapprice;
+                    }
+                }
+                voluem++;
+            }
+
+            return bookgriup;
+        }
+
+
     }
 
     public class Book
